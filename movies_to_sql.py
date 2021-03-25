@@ -36,31 +36,37 @@ def create_dependent_tables_movies(all_movies):
     movie_genres = all_movies[["movie_id", "genres"]].explode("genres")
     movie_genres = movie_genres.dropna()
     movie_genres["movie_id"] = movie_genres["movie_id"].apply(lambda x: x["$oid"])
+    movie_genres = movie_genres[["movie_id", "genres"]].astype(str).drop_duplicates()
 
     # Creation of movie cast csv
     movie_cast = all_movies[["movie_id", "cast"]].explode("cast")
     movie_cast = movie_cast.dropna()
     movie_cast["movie_id"] = movie_cast["movie_id"].apply(lambda x: x["$oid"])
+    movie_cast = movie_cast[["movie_id", "cast"]].drop_duplicates()
 
     # creation of movie countries csv
     movie_countries = all_movies[["movie_id", "countries"]].explode("countries")
     movie_countries = movie_countries.dropna()
     movie_countries["movie_id"] = movie_countries["movie_id"].apply(lambda x: x["$oid"])
+    movie_countries = movie_countries[["movie_id", "countries"]].drop_duplicates()
 
     # creation of movie directors csv
     movie_directors = all_movies[["movie_id", "directors"]].explode("directors")
     movie_directors = movie_directors.dropna()
     movie_directors["movie_id"] = movie_directors["movie_id"].apply(lambda x: x["$oid"])
+    movie_directors = movie_directors[["movie_id", "directors"]].drop_duplicates()
 
     # creation of movie_languages csv
     movie_languages = all_movies[["movie_id", "languages"]].explode("languages")
     movie_languages = movie_languages.dropna()
     movie_languages["movie_id"] = movie_languages["movie_id"].apply(lambda x: x["$oid"])
+    movie_languages = movie_languages[["movie_id", "languages"]].drop_duplicates()
 
     # creation of movie writers #csv
     movie_writers = all_movies[["movie_id", "writers"]].explode("writers")
     movie_writers = movie_writers.dropna()
     movie_writers["movie_id"] = movie_writers["movie_id"].apply(lambda x: x["$oid"])
+    movie_writers = movie_writers[["movie_id", "writers"]].drop_duplicates()
 
     # Remove all additional explanation beyond writers name
     movie_writers["writers"] = movie_writers["writers"].str.replace(r"\([^()]*\)","")
