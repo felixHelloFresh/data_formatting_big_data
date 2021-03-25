@@ -77,7 +77,7 @@ def create_comments(all_users, all_movies):
 
     ###### Comments csv
     all_comments = pd.read_json("mflix_comments.json").rename(columns ={"_id": "comment_id"})
-    all_comments["comment_id"] = all_comments["movie_id"].apply(lambda x: x["$oid"])
+    all_comments["comment_id"] = all_comments["comment_id"].apply(lambda x: x["$oid"])
     all_comments["movie_id"] = all_comments["movie_id"].apply(lambda x: x["$oid"])
     all_comments["date"] = all_comments["date"].apply(lambda x: x["$date"])
 
