@@ -34,26 +34,32 @@ def create_dependent_tables_movies(all_movies):
 
     # Creation of movie genre csv
     movie_genres = all_movies[["movie_id", "genres"]].explode("genres")
+    movie_genres = movie_genres.dropna()
     movie_genres["movie_id"] = movie_genres["movie_id"].apply(lambda x: x["$oid"])
 
     # Creation of movie cast csv
     movie_cast = all_movies[["movie_id", "cast"]].explode("cast")
+    movie_cast = movie_cast.dropna()
     movie_cast["movie_id"] = movie_cast["movie_id"].apply(lambda x: x["$oid"])
 
     # creation of movie countries csv
     movie_countries = all_movies[["movie_id", "countries"]].explode("countries")
+    movie_countries = movie_countries.dropna()
     movie_countries["movie_id"] = movie_countries["movie_id"].apply(lambda x: x["$oid"])
 
     # creation of movie directors csv
     movie_directors = all_movies[["movie_id", "directors"]].explode("directors")
+    movie_directors = movie_directors.dropna()
     movie_directors["movie_id"] = movie_directors["movie_id"].apply(lambda x: x["$oid"])
 
     # creation of movie_languages csv
     movie_languages = all_movies[["movie_id", "languages"]].explode("languages")
+    movie_languages = movie_languages.dropna()
     movie_languages["movie_id"] = movie_languages["movie_id"].apply(lambda x: x["$oid"])
 
     # creation of movie writers #csv
     movie_writers = all_movies[["movie_id", "writers"]].explode("writers")
+    movie_writers = movie_writers.dropna()
     movie_writers["movie_id"] = movie_writers["movie_id"].apply(lambda x: x["$oid"])
 
     # Remove all additional explanation beyond writers name
