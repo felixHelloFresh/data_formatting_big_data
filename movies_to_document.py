@@ -26,6 +26,7 @@ def create_comments(all_movies):
     all_comments = pd.read_json("mflix_comments.json")
     all_comments['join_id'] = all_comments["movie_id"].apply(lambda x: x["$oid"])
     all_comments['_id'] = all_comments["_id"].apply(lambda x: {'oid': x["$oid"]})
+    all_comments['movie_id'] = all_comments["movie_id"].apply(lambda x: {'oid': x["$oid"]})
 
     # only select comments from the relevant movies
     all_movies = all_movies["_id"].apply(lambda x: x["oid"])
