@@ -1,3 +1,5 @@
+import json
+
 import pandas as pd
 
 
@@ -16,6 +18,8 @@ def create_movie_info(num_rows: int):
     ##Creation of movie_info csv
     all_movies = pd.read_json("mflix_movies.json").iloc[0:num_rows, :]
     all_movies['_id'] = all_movies["_id"].apply(lambda x: {'oid': x["$oid"]})
+    all_movies['released'] = all_movies["released"].apply(lambda x: json.loads(json.dumps(x).replace('$', '')))
+    all_movies['tomatoes'] = all_movies["tomatoes"].apply(lambda x: json.loads(json.dumps(x).replace('$', '')))
 
     return all_movies
 
@@ -26,6 +30,7 @@ def create_comments(all_movies):
     all_comments = pd.read_json("mflix_comments.json")
     all_comments['join_id'] = all_comments["movie_id"].apply(lambda x: x["$oid"])
     all_comments['_id'] = all_comments["_id"].apply(lambda x: {'oid': x["$oid"]})
+    all_comments['date'] = all_comments['date'].apply(lambda x: {'date': x["$date"]})
     all_comments['movie_id'] = all_comments["movie_id"].apply(lambda x: {'oid': x["$oid"]})
 
     # only select comments from the relevant movies
