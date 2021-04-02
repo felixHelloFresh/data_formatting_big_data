@@ -11,11 +11,10 @@ from _experiment import Experiment
 
 def run_experiment():
 
-    # USER INPUT: set personal configurations here
-
+    # TODO: USER INPUT: set personal configurations here
     # Configurations for postgres server: change values only, do not change keys
     postgres_settings = {
-        "user": "felixmooij",
+        "user": "",
         "password": "",
         "host": "localhost",
         "port": "5432",
@@ -28,7 +27,7 @@ def run_experiment():
     }
 
     # Your name for experiment logging
-    person = 'felix'
+    person = ''
 
 
 
